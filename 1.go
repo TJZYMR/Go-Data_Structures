@@ -23,14 +23,11 @@ func (S *Stack) Push(a int) {
 	}
 
 }
-func (S *Stack) Pop(Index int) {
+func (S *Stack) Pop() {
 	if len(S.stack) == 0 {
 		fmt.Println("Stack is empty cannot pop")
-	} else if Index > len(S.stack)-1 {
-		fmt.Println("No element in stack with this index!!ABORT")
-
 	} else {
-		S.stack = S.stack[:Index]
+		S.stack = S.stack[:len(S.stack)-1]
 		S.Top = len(S.stack) - 1
 	}
 }
@@ -42,7 +39,7 @@ func main() {
 	stack.Push(11)
 	stack.Push(22)
 	stack.Push(77)
-	stack.Pop(2) //giving index of the element to be deleted
+	stack.Pop() //giving index of the element to be deleted
 	//stack.Pop(2) //giving index of the element to be deleted
 
 	fmt.Println("Stack Status:==>", stack)
