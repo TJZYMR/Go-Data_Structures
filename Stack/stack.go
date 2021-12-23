@@ -4,7 +4,7 @@ import "fmt"
 
 type Stack struct {
 	stack []int
-	Top   int //index of the top element
+	Top   *int //index of the top element
 }
 
 //empty() – Returns whether the stack is empty – Time Complexity: O(1)
@@ -16,10 +16,10 @@ type Stack struct {
 func (S *Stack) Push(a int) {
 	if len(S.stack) == 0 {
 		S.stack = append(S.stack, a)
-		S.Top = 0
+		*S.Top = 0
 	} else {
 		S.stack = append(S.stack, a)
-		S.Top = S.Top + 1
+		*S.Top = *S.Top + 1
 	}
 
 }
@@ -28,17 +28,17 @@ func (S *Stack) Pop() {
 		fmt.Println("Stack is empty cannot pop")
 	} else if len(S.stack) == 1 {
 		S.stack = []int{}
-		S.Top = -1
+		*S.Top = -1
 	} else {
 		S.stack = S.stack[:len(S.stack)-1]
-		S.Top = len(S.stack) - 1
+		*S.Top = len(S.stack) - 1
 	}
 }
 
 //implemeting stack data structure
 func main() {
 	s := []int{} //initially empty stack
-	stack := Stack{stack: s, Top: 0}
+	stack := Stack{stack: s, Top: new(int)}
 	stack.Push(11)
 	stack.Push(22)
 	stack.Push(77)
@@ -54,12 +54,13 @@ func main() {
 	stack.Push(11)
 	stack.Push(22)
 	stack.Push(77)
-	fmt.Println("Stack Status:==>", stack)
+	stack.Pop()
+	fmt.Println("Stack Status:==>", stack.stack, *stack.Top)
 	fmt.Print("Top Element:=>")
-	if stack.Top == -1 {
+	if *stack.Top == -1 {
 		fmt.Println("-1,", "Stack is empty")
 	} else {
-		fmt.Println("Top Element", stack.stack[stack.Top], "With index:=>", stack.Top)
+		fmt.Println("Top Element", stack.stack[*stack.Top], "With index:=>", *stack.Top)
 	}
 
 }
