@@ -19,13 +19,16 @@ func (S *Stack) Push(a int) {
 		S.Top = 0
 	} else {
 		S.stack = append(S.stack, a)
-		S.Top = len(S.stack) - 1
+		S.Top = S.Top + 1
 	}
 
 }
 func (S *Stack) Pop() {
 	if len(S.stack) == 0 {
 		fmt.Println("Stack is empty cannot pop")
+	} else if len(S.stack) == 1 {
+		S.stack = []int{}
+		S.Top = -1
 	} else {
 		S.stack = S.stack[:len(S.stack)-1]
 		S.Top = len(S.stack) - 1
@@ -39,10 +42,24 @@ func main() {
 	stack.Push(11)
 	stack.Push(22)
 	stack.Push(77)
+	fmt.Println("Stack Status:==>", stack)
+
 	stack.Pop() //giving index of the element to be deleted
 	//stack.Pop(2) //giving index of the element to be deleted
-
+	stack.Pop()
+	stack.Pop()
+	stack.Pop()
+	stack.Pop()
+	stack.Pop()
+	stack.Push(11)
+	stack.Push(22)
+	stack.Push(77)
 	fmt.Println("Stack Status:==>", stack)
-	fmt.Println(stack.stack, "Top Element:=>", stack.stack[stack.Top], "Top Element Index:=>", stack.Top)
+	fmt.Print("Top Element:=>")
+	if stack.Top == -1 {
+		fmt.Println("-1,", "Stack is empty")
+	} else {
+		fmt.Println("Top Element", stack.stack[stack.Top], "With index:=>", stack.Top)
+	}
 
 }
